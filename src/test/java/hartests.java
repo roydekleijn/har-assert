@@ -1,19 +1,28 @@
+
+import harunit.ContainsStatusCode;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.browsermob.core.har.Har;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import harunit.HarAssert;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static harunit.ContainsStatusCode.containsStatusCode;
 
 public class hartests {
-	private String harjson;
-
+	protected Har har;
+	
 	@BeforeClass
-	public void setupTest() {
+	public void setupTest() throws JsonParseException, JsonMappingException, IOException {
 		File file = new File("src/test/resources/har.json");
 		StringBuffer contents = new StringBuffer();
 		BufferedReader reader = null;
@@ -41,13 +50,14 @@ public class hartests {
 			}
 		}
 
-		harjson = contents.toString();
+		ObjectMapper mapper = new ObjectMapper();
+		har = mapper.readValue(contents.toString(), Har.class);
 
 	}
 
 	@Test
 	public void test() {
-		HarAssert.assertQueryParam(harjson, "imn", "1");
+		assertThat(har, Matchers.not(containsStatusCode(404)));
 	}
 
 }
