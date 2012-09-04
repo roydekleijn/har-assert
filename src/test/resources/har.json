@@ -60,7 +60,12 @@
                 "request": {
                     "method": "GET",
                     "headers": [],
-                    "queryString": [],
+                    "queryString": [
+                    {
+                            "name": "imn",
+                            "value": "1"
+                        }
+                        ],
                     "cookies": [
                         {
                             "name": "NID",
