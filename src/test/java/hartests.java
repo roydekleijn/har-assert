@@ -3,11 +3,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.startsWith;
-import static harunit.HarMatchers.requestUrlMethod;
+import static org.hamcrest.Matchers.*;
+import static harunit.HarMatchers.*;
 
 
 import java.io.BufferedReader;
@@ -24,6 +24,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.AnyOf;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -64,6 +65,16 @@ public class hartests {
 		har = mapper.readValue(contents.toString(), Har.class);
 		
 
+	}
+	
+	@Test
+	public void harLogVersion() throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(HarUtil.toString(har), har, logVersion(is(equalTo("1.2"))));
+	}
+	
+	@Test
+	public void harLogBrowser() throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(HarUtil.toString(har), har, allOf(logBrowserName(is(equalTo("Firefox"))), logBrowserVersion(is(equalTo("12.1")))));
 	}
 
 	@Test

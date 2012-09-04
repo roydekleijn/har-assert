@@ -612,11 +612,17 @@
             "version": "2.0"
         },
         "pages": [
-            {
-                "id": "Page 1",
-                "pageTimings": {},
-                "startedDateTime": "2012-08-30T14:38:04.019+0000",
-                "title": ""
+           {
+                "pageTimings": {
+                    "onLoad": 935,
+                    "onContentLoad": -1
+                },
+                "_pageSpeed": {
+                    "score": 76
+                },
+                "title": "Run 1, First View for http://groups.google.com/",
+                "id": "page_1_0",
+                "startedDateTime": "2012-06-15T12:11:20.000+00:00"
             }
         ]
     }
