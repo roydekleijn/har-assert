@@ -1,8 +1,7 @@
 import static harMatchers.HarLogMatchers.*;
-import static harMatchers.HarRequestMatchers.*;
 import static harMatchers.HarResponseMatchers.*;
+import static harMatchers.HarRequestMatchers.requestUrlCookieName;
 
-import static harMatchers.HarMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -82,12 +81,12 @@ public class hartests {
 
 	@Test
 	public void harContainsResponseStatusCodesGreaterThan404() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, responseStatusCodes(is(greaterThan(404))));
+		assertThat(HarUtil.toString(har), har, urlResponseStatus(startsWith("http://www.google"), is(greaterThan(404))));
 	}
 	
 	@Test
 	public void harContainsRequestUrlWithMethod() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, requestUrlMethod(startsWith("http://www.google"), is("GET")));
+		assertThat(HarUtil.toString(har), har, requestUrlCookieName(startsWith("http://www.google"), is("GET")));
 	}
 
 	@Test

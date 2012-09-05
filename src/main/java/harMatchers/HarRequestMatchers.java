@@ -81,9 +81,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// -"cookies": [],
-	// --"name": "TestCookie",
-
 	public static Matcher<Har> requestUrlCookieName(final Matcher<String> url,
 			final Matcher<String> cookieName) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -110,8 +107,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// --"value": "Cookie Value",
-
 	public static Matcher<Har> requestUrlCookieValue(final Matcher<String> url,
 			final Matcher<String> cookieValue) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -137,8 +132,6 @@ public class HarRequestMatchers {
 			}
 		};
 	}
-
-	// --"path": "/",
 
 	public static Matcher<Har> requestUrlCookiePath(final Matcher<String> url,
 			final Matcher<String> cookiePath) {
@@ -167,8 +160,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// --"domain": "www.janodvarko.cz",
-
 	public static Matcher<Har> requestUrlCookieDomain(
 			final Matcher<String> url, final Matcher<String> cookieDomain) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -196,8 +187,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// --"expires": "2009-07-24T19:20:30.123+02:00",
-
 	public static Matcher<Har> requestUrlCookieExpires(
 			final Matcher<String> url, final Matcher<String> cookieExpires) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -224,8 +213,6 @@ public class HarRequestMatchers {
 			}
 		};
 	}
-
-	// --"httpOnly": false,
 
 	public static Matcher<Har> requestUrlCookieHttpOnly(
 			final Matcher<String> url, final Matcher<Boolean> cookieHttpOnly) {
@@ -315,8 +302,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// -"headersSize" : 150,
-
 	public static Matcher<Har> requestUrlHeaderSize(final Matcher<String> url,
 			final Matcher<Integer> headerSize) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -326,7 +311,7 @@ public class HarRequestMatchers {
 						.appendText("a absolute URL of the request ")
 						.appendValue(url)
 						.appendText(
-								"the total number of bytes from the start of the HTTP response message until (and including) the double CRLF before the body ")
+								"the total number of bytes from the start of the HTTP request message until (and including) the double CRLF before the body ")
 						.appendValue(headerSize);
 			}
 
@@ -345,8 +330,6 @@ public class HarRequestMatchers {
 		};
 	}
 
-	// -"bodySize" : 0,
-
 	public static Matcher<Har> requestUrlBodySize(final Matcher<String> url,
 			final Matcher<Integer> bodySize, final Matcher<String> queryValue) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
@@ -356,7 +339,7 @@ public class HarRequestMatchers {
 						.appendText("a absolute URL of the request ")
 						.appendValue(url)
 						.appendText(
-								" and the size of the received response body in bytes ")
+								" and the size of the request body (POST data payload) in bytes ")
 						.appendValue(bodySize);
 			}
 
@@ -378,6 +361,10 @@ public class HarRequestMatchers {
 	// -"postData" : {},
 	// --"mimeType": "multipart/form-data",
 	// --"params": [],
+	//---"name": "paramName",
+    //---"value": "paramValue",
+    //---"fileName": "example.pdf",
+    //---"contentType": "application/pdf",
 	// --"text" : "plain posted data",
 
 }
