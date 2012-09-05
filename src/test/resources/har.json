@@ -59,7 +59,12 @@
                 "time": 11,
                 "request": {
                     "method": "GET",
-                    "headers": [],
+                    "headers": [
+                    {
+                            "name": "Accept", 
+                            "value": "text/html, application/xhtml+xml, */*"
+                        }
+                        ],
                     "queryString": [
                     {
                             "name": "imn",
@@ -616,9 +621,6 @@
                 "pageTimings": {
                     "onLoad": 935,
                     "onContentLoad": -1
-                },
-                "_pageSpeed": {
-                    "score": 76
                 },
                 "title": "Run 1, First View for http://groups.google.com/",
                 "id": "page_1_0",

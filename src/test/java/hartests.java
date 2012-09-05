@@ -1,4 +1,8 @@
-import static harunit.HarMatchers.responseStatusCodes;
+import static harMatchers.HarLogMatchers.*;
+import static harMatchers.HarRequestMatchers.*;
+import static harMatchers.HarResponseMatchers.*;
+
+import static harMatchers.HarMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -7,7 +11,6 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.Matchers.*;
-import static harunit.HarMatchers.*;
 
 
 import java.io.BufferedReader;
@@ -87,4 +90,8 @@ public class hartests {
 		assertThat(HarUtil.toString(har), har, requestUrlMethod(startsWith("http://www.google"), is("GET")));
 	}
 
+	@Test
+	public void harContainsRequestUrlWithCookieName() throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(HarUtil.toString(har), har, requestUrlCookieName(startsWith("http://www.google"), is("NIDe")));
+	}
 }

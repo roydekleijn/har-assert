@@ -1,4 +1,4 @@
-package harunit;
+package harMatchers;
 
 import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarEntry;
@@ -9,66 +9,6 @@ import org.testng.annotations.Optional;
 
 public class HarMatchers {
 
-	/*
-	 * Log matchers
-	 */
-
-	public static Matcher<Har> logVersion(final Matcher<String> version) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
-
-			public void describeTo(final Description description) {
-				description.appendText("a har with version number ")
-						.appendValue(version);
-			}
-
-			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
-				if (version.matches(har.getLog().getVersion())) {
-					return true;
-				}
-				return false;
-			}
-		};
-	}
-
-	public static Matcher<Har> logBrowserName(final Matcher<String> name) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
-
-			public void describeTo(final Description description) {
-				description.appendText("a har with browser name ").appendValue(
-						name);
-			}
-
-			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
-				if (name.matches(har.getLog().getBrowser().getName())) {
-					return true;
-				}
-				return false;
-			}
-		};
-	}
-
-	public static Matcher<Har> logBrowserVersion(final Matcher<String> version) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
-
-			public void describeTo(final Description description) {
-				description.appendText("a har with browser version number ")
-						.appendValue(version);
-			}
-
-			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
-				if (version.matches(har.getLog().getBrowser().getVersion())) {
-					return true;
-				}
-				return false;
-			}
-		};
-	}
 	
 	
 	
@@ -159,30 +99,7 @@ public class HarMatchers {
     //-"headersSize" : 160,
     //-"bodySize" : 850,
 
-	public static Matcher<Har> requestUrlMethod(final Matcher<String> url,
-			final Matcher<String> method) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
-
-			public void describeTo(final Description description) {
-				description.appendText("a http response with statusCode ")
-						.appendValue(url).appendText(" and ")
-						.appendValue(method);
-			}
-
-			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
-				for (HarEntry element : har.getLog().getEntries()) {
-					if (url.matches(element.getRequest().getUrl())
-							&& method.matches(element.getRequest().getMethod())) {
-						return true;
-					}
-				}
-				return false;
-			}
-		};
-	}
-
+	
 	public static Matcher<Har> responseStatusCodes(
 			final Matcher<Integer> statusCode) {
 		return new TypeSafeDiagnosingMatcher<Har>() {
