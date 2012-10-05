@@ -1,16 +1,19 @@
-import static harMatchers.HarLogMatchers.*;
-import static harMatchers.HarResponseMatchers.*;
+import static harMatchers.HarBrowserMatchers.logBrowserName;
+import static harMatchers.HarBrowserMatchers.logBrowserVersion;
+import static harMatchers.HarEntryMatchers.entryServerIpAddress;
+import static harMatchers.HarEntryMatchers.entryTime;
+import static harMatchers.HarLogMatchers.logVersion;
+import static harMatchers.HarPageMatchers.pageId;
+import static harMatchers.HarPageMatchers.pageTitle;
 import static harMatchers.HarRequestMatchers.requestUrlCookieName;
-
+import static harMatchers.HarRequestMatchers.requestUrlMethod;
+import static harMatchers.HarResponseMatchers.urlResponseStatus;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.Matchers.*;
-
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,10 +26,6 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.hamcrest.core.AnyOf;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -65,32 +64,77 @@ public class hartests {
 
 		ObjectMapper mapper = new ObjectMapper();
 		har = mapper.readValue(contents.toString(), Har.class);
-		
 
-	}
-	
-	@Test
-	public void harLogVersion() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, logVersion(is(equalTo("1.2"))));
-	}
-	
-	@Test
-	public void harLogBrowser() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, allOf(logBrowserName(is(equalTo("Firefox"))), logBrowserVersion(is(equalTo("12.1")))));
 	}
 
 	@Test
-	public void harContainsResponseStatusCodesGreaterThan404() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, urlResponseStatus(startsWith("http://www.google"), is(greaterThan(404))));
-	}
-	
-	@Test
-	public void harContainsRequestUrlWithMethod() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, requestUrlCookieName(startsWith("http://www.google"), is("GET")));
+	public void harLogVersion() throws JsonGenerationException,
+			JsonMappingException, IOException {
+		assertThat(HarUtil.toString(har), har, logVersion(is("1.2")));
 	}
 
 	@Test
-	public void harContainsRequestUrlWithCookieName() throws JsonGenerationException, JsonMappingException, IOException {
-		assertThat(HarUtil.toString(har), har, requestUrlCookieName(startsWith("http://www.google"), is("NIDe")));
+	public void harLogBrowser() throws JsonGenerationException,
+			JsonMappingException, IOException {
+		assertThat(
+				HarUtil.toString(har),
+				har,
+				allOf(logBrowserName(is(equalTo("Firefox"))),
+						logBrowserVersion(is(equalTo("12.1")))));
+	}
+
+	@Test
+	public void harEntryTime() {
+		assertThat(har, entryTime(is(Long.valueOf(25))));
+	}
+
+	@Test
+	public void harEntryServerIpAddress() {
+		assertThat(har, entryServerIpAddress(is("123.321.25.36")));
+	}
+
+	@Test
+	public void harPageId() {
+		assertThat(har, pageId(is("some page id")));
+	}
+
+	@Test
+	public void harPageTitle() {
+		assertThat(har, pageTitle(is("some page id")));
+	}
+
+	@Test
+	public void harRequestUrlWithMethod() {
+		assertThat(har,
+				requestUrlMethod(startsWith("http://www.gofeogle"), is("GET")));
+	}
+
+	@Test
+	public void harContainsResponseStatusCodesGreaterThan404()
+			throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(
+				HarUtil.toString(har),
+				har,
+				urlResponseStatus(startsWith("http://www.google"),
+						is(greaterThan(404))));
+	}
+
+	@Test
+	public void harContainsRequestUrlWithMethod()
+			throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(
+				HarUtil.toString(har),
+				har,
+				requestUrlCookieName(startsWith("http://www.google"), is("GET")));
+	}
+
+	@Test
+	public void harContainsRequestUrlWithCookieName()
+			throws JsonGenerationException, JsonMappingException, IOException {
+		assertThat(
+				HarUtil.toString(har),
+				har,
+				requestUrlCookieName(startsWith("http://www.google"),
+						is("NIDe")));
 	}
 }

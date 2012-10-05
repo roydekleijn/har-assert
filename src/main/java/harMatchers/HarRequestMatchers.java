@@ -4,16 +4,19 @@ import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarCookie;
 import org.browsermob.core.har.HarEntry;
 import org.browsermob.core.har.HarNameValuePair;
+import org.browsermob.core.har.HarPage;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
 public class HarRequestMatchers {
 
 	public static Matcher<Har> requestUrlMethod(final Matcher<String> url,
 			final Matcher<String> method) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
+		return new TypeSafeMatcher<Har>() {
 
+			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a absolute URL of the request ")
 						.appendValue(url).appendText(" and request method ")
@@ -21,8 +24,16 @@ public class HarRequestMatchers {
 			}
 
 			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
+			public void describeMismatchSafely(Har har,
+					Description mismatchDescription) {
+				mismatchDescription
+						.appendText("there is no absolute URL of the request ")
+						.appendValue(url).appendText(" and request method ")
+						.appendValue(method);
+			}
+
+			@Override
+			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					if (url.matches(element.getRequest().getUrl())
 							&& method.matches(element.getRequest().getMethod())) {
@@ -35,16 +46,24 @@ public class HarRequestMatchers {
 	}
 
 	public static Matcher<Har> requestUrl(final Matcher<String> url) {
-		return new TypeSafeDiagnosingMatcher<Har>() {
+		return new TypeSafeMatcher<Har>() {
 
+			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a absolute URL of the request ")
 						.appendValue(url);
 			}
 
 			@Override
-			protected boolean matchesSafely(Har har,
-					final Description mismatchDescription) {
+			public void describeMismatchSafely(Har har,
+					Description mismatchDescription) {
+				mismatchDescription.appendText(
+						"the is no absolute URL of the request ").appendValue(
+						url);
+			}
+
+			@Override
+			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					if (url.matches(element.getRequest().getUrl())) {
 						return true;
@@ -361,10 +380,10 @@ public class HarRequestMatchers {
 	// -"postData" : {},
 	// --"mimeType": "multipart/form-data",
 	// --"params": [],
-	//---"name": "paramName",
-    //---"value": "paramValue",
-    //---"fileName": "example.pdf",
-    //---"contentType": "application/pdf",
+	// ---"name": "paramName",
+	// ---"value": "paramValue",
+	// ---"fileName": "example.pdf",
+	// ---"contentType": "application/pdf",
 	// --"text" : "plain posted data",
 
 }
