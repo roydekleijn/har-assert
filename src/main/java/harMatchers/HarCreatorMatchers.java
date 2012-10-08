@@ -6,13 +6,21 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class HarCreatorMatchers {
-	public static Matcher<Har> creatorName(final Matcher<String> name) {
+
+	/**
+	 * Example usage: assertThat(har,
+	 * creatorName(is("The name of the creator of this HAR file")));
+	 * 
+	 * @param creatorName
+	 * @return
+	 */
+	public static Matcher<Har> creatorName(final Matcher<String> creatorName) {
 		return new TypeSafeMatcher<Har>() {
 
 			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a creator with version number ")
-						.appendValue(name);
+						.appendValue(creatorName);
 			}
 
 			@Override
@@ -24,7 +32,7 @@ public class HarCreatorMatchers {
 
 			@Override
 			protected boolean matchesSafely(Har har) {
-				if (name.matches(har.getLog().getVersion())) {
+				if (creatorName.matches(har.getLog().getVersion())) {
 					return true;
 				}
 				return false;
@@ -32,13 +40,21 @@ public class HarCreatorMatchers {
 		};
 	}
 
-	public static Matcher<Har> creatorVersion(final Matcher<String> version) {
+	/**
+	 * Example usage: assertThat( har,
+	 * creatorVersion(is("The version of the creator of this HAR file")));
+	 * 
+	 * @param creatorVersion
+	 * @return
+	 */
+	public static Matcher<Har> creatorVersion(
+			final Matcher<String> creatorVersion) {
 		return new TypeSafeMatcher<Har>() {
 
 			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a creator with version number ")
-						.appendValue(version);
+						.appendValue(creatorVersion);
 			}
 
 			@Override
@@ -50,7 +66,7 @@ public class HarCreatorMatchers {
 
 			@Override
 			protected boolean matchesSafely(Har har) {
-				if (version.matches(har.getLog().getVersion())) {
+				if (creatorVersion.matches(har.getLog().getVersion())) {
 					return true;
 				}
 				return false;

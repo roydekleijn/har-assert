@@ -6,12 +6,18 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class HarBrowserMatchers {
-	public static Matcher<Har> logBrowserName(final Matcher<String> name) {
+	/**
+	 * Example usage: assertThat(har, logBrowserName(is("Firefox")));
+	 * 
+	 * @param browserName
+	 * @return
+	 */
+	public static Matcher<Har> logBrowserName(final Matcher<String> browserName) {
 		return new TypeSafeMatcher<Har>() {
 			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a har with browser name ").appendValue(
-						name);
+						browserName);
 			}
 
 			@Override
@@ -23,7 +29,7 @@ public class HarBrowserMatchers {
 
 			@Override
 			protected boolean matchesSafely(Har har) {
-				if (name.matches(har.getLog().getBrowser().getName())) {
+				if (browserName.matches(har.getLog().getBrowser().getName())) {
 					return true;
 				}
 				return false;
@@ -31,12 +37,19 @@ public class HarBrowserMatchers {
 		};
 	}
 
-	public static Matcher<Har> logBrowserVersion(final Matcher<String> version) {
+	/**
+	 * Example usage: assertThat(har, logBrowserVersion(is("15.0")));
+	 * 
+	 * @param version
+	 * @return
+	 */
+	public static Matcher<Har> logBrowserVersion(
+			final Matcher<String> browserVersion) {
 		return new TypeSafeMatcher<Har>() {
 			@Override
 			public void describeTo(final Description description) {
 				description.appendText("a har with browser version number ")
-						.appendValue(version);
+						.appendValue(browserVersion);
 			}
 
 			@Override
@@ -48,7 +61,8 @@ public class HarBrowserMatchers {
 
 			@Override
 			protected boolean matchesSafely(Har har) {
-				if (version.matches(har.getLog().getBrowser().getVersion())) {
+				if (browserVersion.matches(har.getLog().getBrowser()
+						.getVersion())) {
 					return true;
 				}
 				return false;

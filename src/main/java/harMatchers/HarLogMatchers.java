@@ -6,6 +6,13 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class HarLogMatchers {
+
+	/**
+	 * Example usage: assertThat(har, logVersion(is("1.2")));
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static Matcher<Har> logVersion(final Matcher<String> version) {
 		return new TypeSafeMatcher<Har>() {
 
