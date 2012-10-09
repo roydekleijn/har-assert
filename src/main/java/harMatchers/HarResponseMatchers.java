@@ -282,6 +282,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookieName(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("cookieName")));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookieName
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookieName(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseCookieName) {
@@ -320,6 +328,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookieValue(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("cookieValue")));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookieValue
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookieValue(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseCookieValue) {
@@ -359,6 +375,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookiePath(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("cookiePath")));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookiePath
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookiePath(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseCookiePath) {
@@ -400,6 +424,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookieDomain(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("cookieDomain")));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookieDomain
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookieDomain(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseCookieDomain) {
@@ -439,6 +471,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookieExpires(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("cookieExpires")));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookieExpires
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookieExpires(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseCookieExpires) {
@@ -478,6 +518,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseCookieHttpOnly(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is(true)));
+	 * 
+	 * @param requestUrl
+	 * @param responseCookieHttpOnly
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseCookieHttpOnly(
 			final Matcher<String> requestUrl,
 			final Matcher<Boolean> responseCookieHttpOnly) {
@@ -517,6 +565,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseHeaderName(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("headerName")));
+	 * 
+	 * @param requestUrl
+	 * @param responseHeaderName
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseHeaderName(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseHeaderName) {
@@ -557,6 +613,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseHeaderValue(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("headerValue")));
+	 * 
+	 * @param requestUrl
+	 * @param responseHeaderValue
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseHeaderValue(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseHeaderValue) {
@@ -597,9 +661,18 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseContentSize(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"),
+	 * is(lessThan(Long.valueOf(45)))));
+	 * 
+	 * @param requestUrl
+	 * @param responseContentSize
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseContentSize(
 			final Matcher<String> requestUrl,
-			final Matcher<String> responseContentSize) {
+			final Matcher<Long> responseContentSize) {
 		return new TypeSafeMatcher<Har>() {
 
 			@Override
@@ -634,6 +707,15 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseContentCompression(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"),
+	 * is(lessThan(Long.valueOf(45)))));
+	 * 
+	 * @param requestUrl
+	 * @param contentCompression
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseContentCompression(
 			final Matcher<String> requestUrl,
 			final Matcher<Long> contentCompression) {
@@ -671,6 +753,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseContentMimeType(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("Mimetype")));
+	 * 
+	 * @param requestUrl
+	 * @param responseContentMimeType
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseContentMimeType(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseContentMimeType) {
@@ -708,6 +798,14 @@ public class HarResponseMatchers {
 		};
 	}
 
+	/**
+	 * Example usage: assertThat(har, requestUrlResponseContentText(is(
+	 * "http://www.google.nl/images/srpr/logo3w.png"), is("Text")));
+	 * 
+	 * @param requestUrl
+	 * @param responseContentText
+	 * @return
+	 */
 	public static Matcher<Har> requestUrlResponseContentText(
 			final Matcher<String> requestUrl,
 			final Matcher<String> responseContentText) {

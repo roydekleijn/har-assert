@@ -1,19 +1,73 @@
 import static harMatchers.HarBrowserMatchers.logBrowserName;
 import static harMatchers.HarBrowserMatchers.logBrowserVersion;
+import static harMatchers.HarCreatorMatchers.creatorName;
+import static harMatchers.HarCreatorMatchers.creatorVersion;
+import static harMatchers.HarEntryMatchers.entryAftercacheETag;
+import static harMatchers.HarEntryMatchers.entryAftercacheExpires;
+import static harMatchers.HarEntryMatchers.entryAftercacheHitCount;
+import static harMatchers.HarEntryMatchers.entryAftercacheLastAccess;
+import static harMatchers.HarEntryMatchers.entryBeforecacheETag;
+import static harMatchers.HarEntryMatchers.entryBeforecacheExpires;
+import static harMatchers.HarEntryMatchers.entryBeforecacheHitCount;
+import static harMatchers.HarEntryMatchers.entryBeforecacheLastAccess;
+import static harMatchers.HarEntryMatchers.entryPageref;
 import static harMatchers.HarEntryMatchers.entryServerIpAddress;
-import static harMatchers.HarEntryMatchers.*;
+import static harMatchers.HarEntryMatchers.entryTime;
+import static harMatchers.HarEntryMatchers.entryTimingsBlocked;
+import static harMatchers.HarEntryMatchers.entryTimingsConnect;
+import static harMatchers.HarEntryMatchers.entryTimingsDns;
+import static harMatchers.HarEntryMatchers.entryTimingsReceive;
+import static harMatchers.HarEntryMatchers.entryTimingsSend;
+import static harMatchers.HarEntryMatchers.entryTimingsWait;
 import static harMatchers.HarLogMatchers.logVersion;
-import static harMatchers.HarPageMatchers.*;
+import static harMatchers.HarPageMatchers.pageId;
+import static harMatchers.HarPageMatchers.pageTimingOnContentLoad;
+import static harMatchers.HarPageMatchers.pageTimingOnload;
 import static harMatchers.HarPageMatchers.pageTitle;
-import static harMatchers.HarRequestMatchers.*;
+import static harMatchers.HarRequestMatchers.requestUrlBodysize;
+import static harMatchers.HarRequestMatchers.requestUrlCookieDomain;
+import static harMatchers.HarRequestMatchers.requestUrlCookieExpires;
+import static harMatchers.HarRequestMatchers.requestUrlCookieHttpOnly;
+import static harMatchers.HarRequestMatchers.requestUrlCookieName;
+import static harMatchers.HarRequestMatchers.requestUrlCookiePath;
+import static harMatchers.HarRequestMatchers.requestUrlCookieValue;
+import static harMatchers.HarRequestMatchers.requestUrlHeaderName;
+import static harMatchers.HarRequestMatchers.requestUrlHeaderSize;
+import static harMatchers.HarRequestMatchers.requestUrlHeaderValue;
+import static harMatchers.HarRequestMatchers.requestUrlHttpVersion;
 import static harMatchers.HarRequestMatchers.requestUrlMethod;
-import static harMatchers.HarResponseMatchers.*;
-import static harMatchers.HarCreatorMatchers.*;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataMimetype;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataParamsContentType;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataParamsFilename;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataParamsName;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataParamsValue;
+import static harMatchers.HarRequestMatchers.requestUrlPostdataText;
+import static harMatchers.HarRequestMatchers.requestUrlQuerystringName;
+import static harMatchers.HarResponseMatchers.requestUrlResponseBodySize;
+import static harMatchers.HarResponseMatchers.requestUrlResponseContentCompression;
+import static harMatchers.HarResponseMatchers.requestUrlResponseContentMimeType;
+import static harMatchers.HarResponseMatchers.requestUrlResponseContentSize;
+import static harMatchers.HarResponseMatchers.requestUrlResponseContentText;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookieDomain;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookieExpires;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookieHttpOnly;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookieName;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookiePath;
+import static harMatchers.HarResponseMatchers.requestUrlResponseCookieValue;
+import static harMatchers.HarResponseMatchers.requestUrlResponseHeaderName;
+import static harMatchers.HarResponseMatchers.requestUrlResponseHeaderValue;
+import static harMatchers.HarResponseMatchers.requestUrlResponseHeadersSize;
+import static harMatchers.HarResponseMatchers.requestUrlResponseHttpVersion;
+import static harMatchers.HarResponseMatchers.requestUrlResponseRedirectUrl;
+import static harMatchers.HarResponseMatchers.requestUrlResponseStatus;
+import static harMatchers.HarResponseMatchers.requestUrlResponseStatusText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.startsWith;
 
 import java.io.BufferedReader;
@@ -373,32 +427,163 @@ public class hartests {
 
 	@Test
 	public void harResponseUrlWithStatus() {
-		assertThat(har, requestUrlResponseStatus(is("http://www.google.nl/images/srpr/logo3w.png"), is(200)));
+		assertThat(
+				har,
+				requestUrlResponseStatus(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(200)));
 	}
 
 	@Test
 	public void harResponseUrlWithStatusText() {
-		assertThat(har, requestUrlResponseStatusText(is("http://www.google.nl/images/srpr/logo3w.png"), is("OK")));
+		assertThat(
+				har,
+				requestUrlResponseStatusText(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("OK")));
 	}
 
 	@Test
 	public void harResponseUrlWithHttpVersion() {
-		assertThat(har, requestUrlResponseHttpVersion(is("http://www.google.nl/images/srpr/logo3w.png"), is("HTTP")));
-	}
-	
-	@Test
-	public void harResponseUrlWithRedirectUrl() {
-		assertThat(har, requestUrlResponseRedirectUrl(is("http://www.google.nl/images/srpr/logo3w.png"), is("")));
-	}
-	
-	@Test
-	public void harResponseUrlWithHeadersSize() {
-		assertThat(har, requestUrlResponseHeadersSize(is("http://www.google.nl/images/srpr/logo3w.png"), is(lessThan(Long.valueOf(45)))));
-	}
-	
-	@Test
-	public void harResponseUrlWithBodySize() {
-		assertThat(har, requestUrlResponseBodySize(is("http://www.google.nl/images/srpr/logo3w.png"), is(lessThan(Long.valueOf(45)))));
+		assertThat(
+				har,
+				requestUrlResponseHttpVersion(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("HTTP")));
 	}
 
+	@Test
+	public void harResponseUrlWithRedirectUrl() {
+		assertThat(
+				har,
+				requestUrlResponseRedirectUrl(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("")));
+	}
+
+	@Test
+	public void harResponseUrlWithHeadersSize() {
+		assertThat(
+				har,
+				requestUrlResponseHeadersSize(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(lessThan(Long.valueOf(45)))));
+	}
+
+	@Test
+	public void harResponseUrlWithBodySize() {
+		assertThat(
+				har,
+				requestUrlResponseBodySize(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(lessThan(Long.valueOf(45)))));
+	}
+
+	@Test
+	public void harResponseUrlWithCookieName() {
+		assertThat(
+				har,
+				requestUrlResponseCookieName(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("cookieName")));
+	}
+
+	@Test
+	public void harResponseUrlWithCookieValue() {
+		assertThat(
+				har,
+				requestUrlResponseCookieValue(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("cookieValue")));
+	}
+
+	@Test
+	public void harResponseUrlWithCookiePath() {
+		assertThat(
+				har,
+				requestUrlResponseCookiePath(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("cookiePath")));
+	}
+
+	@Test
+	public void harResponseUrlWithCookieDomain() {
+		assertThat(
+				har,
+				requestUrlResponseCookieDomain(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("cookieDomain")));
+	}
+
+	@Test
+	public void harResponseUrlWithCookieExpires() {
+		assertThat(
+				har,
+				requestUrlResponseCookieExpires(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("cookieExpires")));
+	}
+
+	@Test
+	public void harResponseUrlWithCookieHttpOnly() {
+		assertThat(
+				har,
+				requestUrlResponseCookieHttpOnly(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(true)));
+	}
+
+	@Test
+	public void harResponseUrlWithHeaderName() {
+		assertThat(
+				har,
+				requestUrlResponseHeaderName(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("headerName")));
+	}
+
+	@Test
+	public void harResponseUrlWithHeaderValue() {
+		assertThat(
+				har,
+				requestUrlResponseHeaderValue(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("headerValue")));
+	}
+
+	@Test
+	public void harResponseUrlWithContentSize() {
+		assertThat(
+				har,
+				requestUrlResponseContentSize(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(lessThan(Long.valueOf(45)))));
+	}
+
+	@Test
+	public void harResponseUrlWithContentCompression() {
+		assertThat(
+				har,
+				requestUrlResponseContentCompression(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is(lessThan(Long.valueOf(45)))));
+	}
+
+	@Test
+	public void harResponseUrlWithContentMimeType() {
+		assertThat(
+				har,
+				requestUrlResponseContentMimeType(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("Mimetype")));
+	}
+
+	@Test
+	public void harResponseUrlWithContentText() {
+		assertThat(
+				har,
+				requestUrlResponseContentText(
+						is("http://www.google.nl/images/srpr/logo3w.png"),
+						is("Text")));
+	}
 }
