@@ -34,11 +34,11 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (entryPageref.matches(element.getPageref())) {
-						return true;
+					if (!entryPageref.matches(element.getPageref())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -69,11 +69,11 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (entryTime.matches(element.getTime())) {
-						return true;
+					if (!entryTime.matches(element.getTime())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -106,11 +106,11 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (serverIpAddress.matches(element.getServerIPAddress())) {
-						return true;
+					if (!serverIpAddress.matches(element.getServerIPAddress())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -144,12 +144,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheExpires.matches(element.getCache()
+					if (!cacheExpires.matches(element.getCache()
 							.getAfterRequest().getExpires())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -183,12 +183,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheLastAccess.matches(element.getCache()
+					if (!cacheLastAccess.matches(element.getCache()
 							.getAfterRequest().getLastAccess())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -219,12 +219,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheETag.matches(element.getCache().getAfterRequest()
+					if (!cacheETag.matches(element.getCache().getAfterRequest()
 							.geteTag())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -258,12 +258,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheHitCount.matches(element.getCache()
+					if (!cacheHitCount.matches(element.getCache()
 							.getAfterRequest().getHitCount())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -297,12 +297,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheExpires.matches(element.getCache()
+					if (!cacheExpires.matches(element.getCache()
 							.getBeforeRequest().getExpires())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -336,12 +336,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheLastAccess.matches(element.getCache()
+					if (!cacheLastAccess.matches(element.getCache()
 							.getBeforeRequest().getLastAccess())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -372,12 +372,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheETag.matches(element.getCache().getBeforeRequest()
-							.geteTag())) {
-						return true;
+					if (!cacheETag.matches(element.getCache()
+							.getBeforeRequest().geteTag())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -411,12 +411,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (cacheHitCount.matches(element.getCache()
+					if (!cacheHitCount.matches(element.getCache()
 							.getBeforeRequest().getHitCount())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -450,12 +450,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsBlocked.matches(element.getTimings()
+					if (!timingsBlocked.matches(element.getTimings()
 							.getBlocked())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -487,11 +487,11 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsDns.matches(element.getTimings().getDns())) {
-						return true;
+					if (!timingsDns.matches(element.getTimings().getDns())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -525,12 +525,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsConnect.matches(element.getTimings()
+					if (!timingsConnect.matches(element.getTimings()
 							.getConnect())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -564,11 +564,11 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsSend.matches(element.getTimings().getSend())) {
-						return true;
+					if (!timingsSend.matches(element.getTimings().getSend())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -602,17 +602,17 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsWait.matches(element.getTimings().getWait())) {
-						return true;
+					if (!timingsWait.matches(element.getTimings().getWait())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
 
 	/**
-	 * Example usage: 
+	 * Example usage:
 	 * 
 	 * @param timingsReceive
 	 * @return
@@ -640,12 +640,12 @@ public class HarEntryMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (timingsReceive.matches(element.getTimings()
+					if (!timingsReceive.matches(element.getTimings()
 							.getReceive())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}

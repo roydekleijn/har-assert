@@ -68,6 +68,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 
 import java.io.BufferedReader;
@@ -90,35 +91,9 @@ public class hartests {
 	@BeforeClass
 	public void setupTest() throws JsonParseException, JsonMappingException,
 			IOException {
-		File file = new File("src/test/resources/har.json");
-		StringBuffer contents = new StringBuffer();
-		BufferedReader reader = null;
-
-		try {
-			reader = new BufferedReader(new FileReader(file));
-			String text = null;
-
-			// repeat until all lines is read
-			while ((text = reader.readLine()) != null) {
-				contents.append(text).append(
-						System.getProperty("line.separator"));
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (reader != null) {
-					reader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 
 		ObjectMapper mapper = new ObjectMapper();
-		har = mapper.readValue(contents.toString(), Har.class);
+		har = mapper.readValue(new File("src/test/resources/har.json"), Har.class);
 
 	}
 
@@ -432,6 +407,12 @@ public class hartests {
 				requestUrlResponseStatus(
 						is("http://www.google.nl/images/srpr/logo3w.png"),
 						is(200)));
+	}
+	
+	@Test
+	public void harResponseUrlWithStatusNot404() {
+		assertThat(har,
+				requestUrlResponseStatus(startsWith("http://"), not(is(404))));
 	}
 
 	@Test

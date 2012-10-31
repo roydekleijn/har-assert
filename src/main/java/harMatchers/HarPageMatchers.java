@@ -35,11 +35,11 @@ public class HarPageMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarPage element : har.getLog().getPages()) {
-					if (pageId.matches(element.getId())) {
-						return true;
+					if (!pageId.matches(element.getId())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -71,11 +71,11 @@ public class HarPageMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarPage element : har.getLog().getPages()) {
-					if (pageTitle.matches(element.getTitle())) {
-						return true;
+					if (!pageTitle.matches(element.getTitle())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -110,12 +110,12 @@ public class HarPageMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarPage element : har.getLog().getPages()) {
-					if (pageOnloadTiming.matches(element.getPageTimings()
+					if (!pageOnloadTiming.matches(element.getPageTimings()
 							.getOnLoad())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -150,12 +150,12 @@ public class HarPageMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarPage element : har.getLog().getPages()) {
-					if (pageOnContentloadTiming.matches(element
+					if (!pageOnContentloadTiming.matches(element
 							.getPageTimings().getOnContentLoad())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}

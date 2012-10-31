@@ -45,13 +45,13 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& requestMethod.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !requestMethod.matches(element.getRequest()
 									.getMethod())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -90,13 +90,13 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& requestHttpVersion.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !requestHttpVersion.matches(element.getRequest()
 									.getHttpVersion())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -135,13 +135,13 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookieName.matches(cookie.getName())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookieName.matches(cookie.getName())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -180,13 +180,13 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookieValue.matches(cookie.getValue())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookieValue.matches(cookie.getValue())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -225,13 +225,13 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookiePath.matches(cookie.getPath())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookiePath.matches(cookie.getPath())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -270,13 +270,13 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookieDomain.matches(cookie.getDomain())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookieDomain.matches(cookie.getDomain())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -316,13 +316,13 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookieExpires.matches(cookie.getExpires())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookieExpires.matches(cookie.getExpires())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -362,13 +362,14 @@ public class HarRequestMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getRequest().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& cookieHttpOnly.matches(cookie.getHttpOnly())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !cookieHttpOnly
+										.matches(cookie.getHttpOnly())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -408,13 +409,13 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getRequest()
 							.getHeaders()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& headerName.matches(nameValuePair.getName())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !headerName.matches(nameValuePair.getName())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -454,14 +455,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getRequest()
 							.getHeaders()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& headerValue
-										.matches(nameValuePair.getValue())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !headerValue.matches(nameValuePair
+										.getValue())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -502,14 +503,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getRequest()
 							.getQueryString()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& querystringName.matches(nameValuePair
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !querystringName.matches(nameValuePair
 										.getName())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -550,14 +551,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getRequest()
 							.getQueryString()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& querystringValue.matches(nameValuePair
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !querystringValue.matches(nameValuePair
 										.getValue())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -596,13 +597,14 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& postdataMimetype.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !postdataMimetype.matches(element.getRequest()
 									.getPostData().getMimeType())) {
-						return true;
+						return false;
 					}
+
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -640,13 +642,13 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& postdataText.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !postdataText.matches(element.getRequest()
 									.getPostData().getText())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -686,13 +688,13 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarPostDataParam postdataParam : element.getRequest()
 							.getPostData().getParams()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& paramsName.matches(postdataParam.getName())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !paramsName.matches(postdataParam.getName())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -732,14 +734,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarPostDataParam postdataParam : element.getRequest()
 							.getPostData().getParams()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& paramsValue
-										.matches(postdataParam.getValue())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !paramsValue.matches(postdataParam
+										.getValue())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -781,14 +783,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarPostDataParam postdataParam : element.getRequest()
 							.getPostData().getParams()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& paramsContentsType.matches(postdataParam
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !paramsContentsType.matches(postdataParam
 										.getContentType())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -830,14 +832,14 @@ public class HarRequestMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarPostDataParam postdataParam : element.getRequest()
 							.getPostData().getParams()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& paramsFilename.matches(postdataParam
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !paramsFilename.matches(postdataParam
 										.getFileName())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -873,13 +875,13 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& headerSize.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !headerSize.matches(element.getRequest()
 									.getHeadersSize())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -915,13 +917,13 @@ public class HarRequestMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& bodysize.matches(element.getRequest()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !bodysize.matches(element.getRequest()
 									.getBodySize())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}

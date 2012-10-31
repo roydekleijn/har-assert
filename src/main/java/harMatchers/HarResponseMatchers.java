@@ -44,13 +44,12 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseStatus.matches(element.getResponse()
-									.getStatus())) {
-						return true;
+					if (!(requestUrl.matches(element.getRequest().getUrl()) && !responseStatus
+							.matches(element.getResponse().getStatus()))) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -89,13 +88,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseStatusText.matches(element.getResponse()
-									.getStatusText())) {
-						return true;
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseStatusText.matches(element
+									.getResponse().getStatusText())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -134,13 +133,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseHttpVersion.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseHttpVersion.matches(element
 									.getResponse().getHttpVersion())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -179,13 +178,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseRedirectUrl.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseRedirectUrl.matches(element
 									.getResponse().getRedirectURL())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -225,13 +224,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseHeadersSize.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseHeadersSize.matches(element
 									.getResponse().getHeadersSize())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -271,13 +270,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseBodySize.matches(element.getResponse()
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseBodySize.matches(element.getResponse()
 									.getBodySize())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -317,13 +316,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookieName.matches(cookie.getName())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookieName
+										.matches(cookie.getName())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -363,14 +363,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookieValue.matches(cookie
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookieValue.matches(cookie
 										.getValue())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -413,13 +413,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookiePath.matches(cookie.getPath())) {
-							return true;
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookiePath
+										.matches(cookie.getPath())) {
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -459,14 +460,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookieDomain.matches(cookie
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookieDomain.matches(cookie
 										.getDomain())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -506,14 +507,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookieExpires.matches(cookie
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookieExpires.matches(cookie
 										.getExpires())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -553,14 +554,14 @@ public class HarResponseMatchers {
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarCookie cookie : element.getResponse().getCookies()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseCookieHttpOnly.matches(cookie
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseCookieHttpOnly.matches(cookie
 										.getHttpOnly())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -601,14 +602,14 @@ public class HarResponseMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getResponse()
 							.getHeaders()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseHeaderName.matches(nameValuePair
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseHeaderName.matches(nameValuePair
 										.getName())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -649,14 +650,14 @@ public class HarResponseMatchers {
 				for (HarEntry element : har.getLog().getEntries()) {
 					for (HarNameValuePair nameValuePair : element.getResponse()
 							.getHeaders()) {
-						if (requestUrl.matches(element.getRequest().getUrl())
-								&& responseHeaderValue.matches(nameValuePair
+						if (!requestUrl.matches(element.getRequest().getUrl())
+								&& !responseHeaderValue.matches(nameValuePair
 										.getValue())) {
-							return true;
+							return false;
 						}
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -696,13 +697,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseContentSize.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseContentSize.matches(element
 									.getResponse().getContent().getSize())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -742,13 +743,14 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& contentCompression.matches(element.getResponse()
-									.getContent().getCompression())) {
-						return true;
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !contentCompression.matches(element
+									.getResponse().getContent()
+									.getCompression())) {
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -787,13 +789,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseContentMimeType.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseContentMimeType.matches(element
 									.getResponse().getContent().getMimeType())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}
@@ -832,13 +834,13 @@ public class HarResponseMatchers {
 			@Override
 			protected boolean matchesSafely(Har har) {
 				for (HarEntry element : har.getLog().getEntries()) {
-					if (requestUrl.matches(element.getRequest().getUrl())
-							&& responseContentText.matches(element
+					if (!requestUrl.matches(element.getRequest().getUrl())
+							&& !responseContentText.matches(element
 									.getResponse().getContent().getText())) {
-						return true;
+						return false;
 					}
 				}
-				return false;
+				return true;
 			}
 		};
 	}

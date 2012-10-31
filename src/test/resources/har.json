@@ -98,7 +98,7 @@
                         "mimeType": "image/png"
                     },
                     "headers": [],
-                    "status": 200,
+                    "status": 404,
                     "cookies": [],
                     "bodySize": 1834,
                     "httpVersion": "HTTP",
