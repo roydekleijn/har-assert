@@ -5,13 +5,18 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class HarBrowserMatchers {
+public final class HarBrowserMatchers {
 	/**
 	 * Example usage: assertThat(har, logBrowserName(is("Firefox")));
 	 * 
 	 * @param browserName
 	 * @return
 	 */
+
+	private HarBrowserMatchers() {
+
+	}
+
 	public static Matcher<Har> logBrowserName(final Matcher<String> browserName) {
 		return new TypeSafeMatcher<Har>() {
 			@Override

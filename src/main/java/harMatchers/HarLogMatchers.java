@@ -5,8 +5,12 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class HarLogMatchers {
+public final class HarLogMatchers {
 
+	private HarLogMatchers() {
+		
+	}
+	
 	/**
 	 * Example usage: assertThat(har, logVersion(is("1.2")));
 	 * 

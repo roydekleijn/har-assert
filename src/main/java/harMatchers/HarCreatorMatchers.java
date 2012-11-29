@@ -5,7 +5,11 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class HarCreatorMatchers {
+public final class HarCreatorMatchers {
+	
+	private HarCreatorMatchers() {
+		
+	}
 
 	/**
 	 * Example usage: assertThat(har,

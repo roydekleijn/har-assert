@@ -8,7 +8,11 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class HarResponseMatchers {
+public final class HarResponseMatchers {
+	
+	private HarResponseMatchers() {
+		
+	}
 
 	/**
 	 * Example usage: assertThat(har, requestUrlResponseStatus(is(

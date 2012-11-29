@@ -6,7 +6,11 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class HarEntryMatchers {
+public final class HarEntryMatchers {
+	
+	private HarEntryMatchers() {
+		
+	}
 
 	/**
 	 * Example usage: assertThat(har, entryPageref(is("Page reference")));
